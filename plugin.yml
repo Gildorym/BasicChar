@@ -1,0 +1,48 @@
+name: BasicChar
+author: Lucariatias
+version: 0.1.0
+main: com.gildorym.basicchar.BasicChar
+commands:
+    getclass:
+        description: Gets someones class
+        usage: /<command> (ign)
+    getlevel:
+        description: Gets someones level
+        usage: /<command> (ign)
+    getprofession:
+        description: Gets someones profession
+        usage: /<command> (ign)
+    listclasses:
+        description: Lists the available classes
+        usage: /<command>
+    listprofessions:
+        description: Lists the available professions
+        usage: /<command>
+    setclass:
+        description: Sets your or someone elses class
+        usage: /<command> (player) [class]
+    setlevel:
+        description: Sets your or someone elses level
+        usage: /<command> (player) [level]
+    setprofession:
+        description: Sets your or someone elses profession
+        usage: /<command> (player) [profession]
+permissions:
+    basicchar.command.getclass:
+        description: Allows you to get other peoples classes
+        default: op
+    basicchar.command.getlevel:
+        description: Allows you to get other peoples levels
+        default: op
+    basicchar.command.getprofession:
+        description: Allows you to get other peoples professions
+        default: op
+    basicchar.command.setclass:
+        description: Allows you to set other peoples classes
+        default: op
+    basicchar.command.setlevel:
+        description: Allows you to set other peoples levels
+        default: op
+    basicchar.command.setprofession:
+        description: Allows you to set other peoples professions
+        default: op
