@@ -28,7 +28,7 @@ public class PlayerExpChangeListener implements Listener {
 			plugin.experience.put(event.getPlayer().getName(), expToNextLevel);
 			plugin.levels.put(event.getPlayer().getName(), plugin.levels.get(event.getPlayer().getName()) + 1);
 		}
-		event.getPlayer().setExp(plugin.experience.get(event.getPlayer().getName()) / expToNextLevel);
+		event.getPlayer().setExp((float) plugin.experience.get(event.getPlayer().getName()) / (float) expToNextLevel);
 	}
 
 }
