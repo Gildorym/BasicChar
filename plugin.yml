@@ -31,6 +31,9 @@ commands:
         description: Sets your or someone elses profession
         usage: /<command> (player) [profession]
 permissions:
+    basicchar.command.addexp:
+        description: Allows you to add exp
+        default: op
     basicchar.command.getclass:
         description: Allows you to get other peoples classes
         default: op
