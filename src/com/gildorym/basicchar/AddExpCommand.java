@@ -16,6 +16,9 @@ public class AddExpCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender.hasPermission("basicchar.command.addexp")) {
 			if (plugin.getServer().getPlayer(args[0]) != null) {
+				if (plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()) == null) {
+					plugin.levels.put(plugin.getServer().getPlayer(args[0]).getName(), 1);
+				}
 				if (plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) == null) {
 					plugin.experience.put(plugin.getServer().getPlayer(args[0]).getName(), 0);
 				}
@@ -26,6 +29,7 @@ public class AddExpCommand implements CommandExecutor {
 					plugin.levels.put(plugin.getServer().getPlayer(args[0]).getName(), plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()) + 1);
 				}
 				plugin.getServer().getPlayer(args[0]).setExp(plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) / expToNextLevel);
+				plugin.getServer().getPlayer(args[0]).setLevel(plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()));
 			}
 		}
 		return true;
