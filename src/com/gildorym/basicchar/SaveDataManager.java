@@ -118,5 +118,41 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
+	
+	public static void saveExperienceData(BasicChar plugin) {
+		try {
+			if (!plugin.getDataFolder().exists()) {
+				plugin.getDataFolder().mkdir();
+			}
+			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			file.delete();
+			file.createNewFile();
+			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(plugin.experience);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void loadExperienceData(BasicChar plugin) {
+		try {
+			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			if (file.exists()) {
+				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+				ObjectInputStream ois = new ObjectInputStream(fis);
+				plugin.experience.putAll((Map<String, Integer>) ois.readObject());
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

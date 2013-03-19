@@ -18,6 +18,10 @@ public class PlayerJoinListener implements Listener {
 			plugin.levels.put(event.getPlayer().getName(), 1);
 			event.getPlayer().setLevel(1);
 		}
+		if (plugin.experience.get(event.getPlayer()) == null) {
+			plugin.experience.put(event.getPlayer().getName(), 0);
+			event.getPlayer().setLevel(0);
+		}
 	}
 
 }
