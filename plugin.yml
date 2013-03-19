@@ -3,6 +3,9 @@ author: Lucariatias
 version: 0.2.0
 main: com.gildorym.basicchar.BasicChar
 commands:
+    addexp:
+        description: Adds exp to a player
+        usage: /<command> [ign] [amount]
     getclass:
         description: Gets someones class
         usage: /<command> (ign)
