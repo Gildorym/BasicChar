@@ -101,7 +101,7 @@ public class EntityDeathListener implements Listener {
 				if (event.getEntityType() == EntityType.ZOMBIE) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 2);
 				}
-				int expToNextLevel = (int) Math.round((1000 * plugin.levels.get(player.getName())) * (0.5 * (plugin.levels.get(player.getName()) + 1)));
+				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
 				if (plugin.experience.get(player.getName()) >= expToNextLevel) {
 					plugin.experience.put(player.getName(), expToNextLevel);
 					plugin.levels.put(player.getName(), plugin.levels.get(player.getName()) + 1);

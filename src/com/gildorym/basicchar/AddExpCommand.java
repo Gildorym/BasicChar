@@ -23,7 +23,7 @@ public class AddExpCommand implements CommandExecutor {
 					plugin.experience.put(plugin.getServer().getPlayer(args[0]).getName(), 0);
 				}
 				plugin.experience.put(plugin.getServer().getPlayer(args[0]).getName(), plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) + Integer.parseInt(args[1]));
-				int expToNextLevel = (int) Math.round((1000 * plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName())) * (0.5 * (plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()) + 1)));
+				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()));
 				if (plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) >= expToNextLevel) {
 					plugin.experience.put(plugin.getServer().getPlayer(args[0]).getName(), expToNextLevel);
 					plugin.levels.put(plugin.getServer().getPlayer(args[0]).getName(), plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()) + 1);

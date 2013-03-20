@@ -27,7 +27,7 @@ public class PlayerRespawnListener implements Listener {
 					plugin.experience.put(player.getName(), 0);
 				}
 				player.setLevel(plugin.levels.get(player.getName()));
-				int expToNextLevel = (int) Math.round((1000 * plugin.levels.get(player.getName())) * (0.5 * (plugin.levels.get(player.getName()) + 1)));
+				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
 				if (plugin.experience.get(player.getName()) >= expToNextLevel) {
 					plugin.experience.put(player.getName(), expToNextLevel);
 					plugin.levels.put(player.getName(), plugin.levels.get(player.getName()) + 1);
