@@ -12,7 +12,7 @@ public class ListProfessionsCommand implements CommandExecutor {
 		for (CharacterProfession characterProfession : CharacterProfession.values()) {
 			sender.sendMessage(ChatColor.GREEN + characterProfession.toString());
 		}
-		return false;
+		return true;
 	}
 
 }

@@ -24,9 +24,10 @@ public class PlayerJoinListener implements Listener {
 		}
 		event.getPlayer().setLevel(plugin.levels.get(event.getPlayer().getName()));
 		int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(event.getPlayer().getName()));
-		if (plugin.experience.get(event.getPlayer().getName()) >= expToNextLevel) {
-			plugin.experience.put(event.getPlayer().getName(), expToNextLevel);
+		while (plugin.experience.get(event.getPlayer().getName()) >= expToNextLevel) {
+			plugin.experience.put(event.getPlayer().getName(), plugin.experience.get(event.getPlayer().getName()) - expToNextLevel);
 			plugin.levels.put(event.getPlayer().getName(), plugin.levels.get(event.getPlayer().getName()) + 1);
+			expToNextLevel = 1000 * plugin.levels.get(event.getPlayer().getName());
 		}
 		event.getPlayer().setExp((float) plugin.experience.get(event.getPlayer().getName()) / (float) expToNextLevel);
 	}

@@ -12,7 +12,7 @@ public class ListClassesCommand implements CommandExecutor {
 		for (CharacterClass characterClass : CharacterClass.values()) {
 			sender.sendMessage(ChatColor.GREEN + characterClass.toString());
 		}
-		return false;
+		return true;
 	}
 
 }
