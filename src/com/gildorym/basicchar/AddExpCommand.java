@@ -32,6 +32,7 @@ public class AddExpCommand implements CommandExecutor {
 				}
 				plugin.getServer().getPlayer(args[0]).setExp((float) plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) / (float) expToNextLevel);
 				plugin.getServer().getPlayer(args[0]).setLevel(plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()));
+				plugin.getServer().getPlayer(args[0]).setMaxHealth(plugin.levels.get(plugin.getServer().getPlayer(args[0]).getName()) * 10);
 				plugin.getServer().getPlayer(args[0]).sendMessage(ChatColor.YELLOW + "+" + Integer.parseInt(args[1]) + " exp");
 				plugin.getServer().getPlayer(args[0]).sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(plugin.getServer().getPlayer(args[0]).getName()) + "/" + expToNextLevel);
 				sender.sendMessage(ChatColor.GREEN + "Gave " + plugin.getServer().getPlayer(args[0]).getName() + " " + Integer.parseInt(args[1]) + " exp");

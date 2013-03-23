@@ -163,6 +163,8 @@ public class EntityDeathListener implements Listener {
 					expToNextLevel = 1000 * plugin.levels.get(player.getName());
 				}
 				player.setExp((float) plugin.experience.get(player.getName()) / (float) expToNextLevel);
+				player.setLevel(plugin.levels.get(player.getName()));
+				player.setMaxHealth(plugin.levels.get(player.getName()) * 10);
 			}
 		}
 	}
