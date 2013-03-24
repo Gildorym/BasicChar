@@ -2,7 +2,9 @@ package com.gildorym.basicchar;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -19,8 +21,19 @@ public class EntityDeathListener implements Listener {
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
 		if (event.getEntity().getLastDamageCause() instanceof EntityDamageByEntityEvent) {
+			Player player = null;
 			if (((EntityDamageByEntityEvent) event.getEntity().getLastDamageCause()).getDamager() instanceof Player) {
-				Player player = (Player) (((EntityDamageByEntityEvent) event.getEntity().getLastDamageCause()).getDamager());
+				player = (Player) (((EntityDamageByEntityEvent) event.getEntity().getLastDamageCause()).getDamager());
+			}
+			if (((EntityDamageByEntityEvent) event.getEntity().getLastDamageCause()).getDamager() instanceof Projectile) {
+				LivingEntity shooter = ((Projectile) ((EntityDamageByEntityEvent) event.getEntity().getLastDamageCause()).getDamager()).getShooter();
+				if (shooter != null) {
+					if (shooter instanceof Player) {
+						player = (Player) shooter;
+					}
+				}
+			}
+			if (player != null) {
 				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
 				if (event.getEntityType() == EntityType.BAT) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5);
