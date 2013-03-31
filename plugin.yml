@@ -1,6 +1,6 @@
 name: BasicChar
 author: Lucariatias
-version: 0.2.7
+version: 0.2.8
 main: com.gildorym.basicchar.BasicChar
 commands:
     addexp:

@@ -27,7 +27,7 @@ public class BasicChar extends JavaPlugin {
 		this.getCommand("getlevel").setExecutor(new GetLevelCommand(this));
 		this.getCommand("listclasses").setExecutor(new ListClassesCommand());
 		this.getCommand("listprofessions").setExecutor(new ListProfessionsCommand());
-		this.registerListeners(new PlayerJoinListener(this), new PlayerExpChangeListener(this), new PlayerRespawnListener(this), new EntityDeathListener(this));
+		this.registerListeners(new PlayerJoinListener(this), new PlayerExpChangeListener(this), new PlayerRespawnListener(this), new EntityDeathListener(this), new EntityDamageListener());
 	}
 	
 	public void onDisable() {
