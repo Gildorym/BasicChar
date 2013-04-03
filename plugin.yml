@@ -47,7 +47,7 @@ permissions:
         description: Allows you to set other peoples classes
         default: op
     basicchar.command.setlevel:
-        description: Allows you to set other peoples levels
+        description: Allows you to set levels
         default: op
     basicchar.command.setprofession:
         description: Allows you to set other peoples professions
