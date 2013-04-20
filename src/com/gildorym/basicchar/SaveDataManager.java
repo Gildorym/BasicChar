@@ -22,6 +22,7 @@ public class SaveDataManager {
 			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.classes);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -37,6 +38,7 @@ public class SaveDataManager {
 				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.classes.putAll((Map<String, CharacterClass>) ois.readObject());
+				ois.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -58,6 +60,7 @@ public class SaveDataManager {
 			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.professions);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -73,6 +76,7 @@ public class SaveDataManager {
 				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.professions.putAll((Map<String, CharacterProfession>) ois.readObject());
+				ois.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -94,6 +98,7 @@ public class SaveDataManager {
 			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.levels);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -109,6 +114,7 @@ public class SaveDataManager {
 				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.levels.putAll((Map<String, Integer>) ois.readObject());
+				ois.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -130,6 +136,7 @@ public class SaveDataManager {
 			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.experience);
+			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -145,6 +152,7 @@ public class SaveDataManager {
 				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.experience.putAll((Map<String, Integer>) ois.readObject());
+				ois.close();
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
