@@ -1,4 +1,4 @@
-package com.gildorym.basicchar;
+package com.gildorymrp.basicchar;
 
 import java.util.HashMap;
 import java.util.Map;

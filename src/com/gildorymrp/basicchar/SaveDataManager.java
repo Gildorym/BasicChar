@@ -1,4 +1,4 @@
-package com.gildorym.basicchar;
+package com.gildorymrp.basicchar;
 
 import java.io.File;
 import java.io.FileInputStream;

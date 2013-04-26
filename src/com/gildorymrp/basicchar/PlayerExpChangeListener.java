@@ -1,26 +1,26 @@
-package com.gildorym.basicchar;
+package com.gildorymrp.basicchar;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerExpChangeEvent;
 
-public class PlayerJoinListener implements Listener {
-	
+public class PlayerExpChangeListener implements Listener {
+
 	private BasicChar plugin;
-	
-	public PlayerJoinListener(BasicChar plugin) {
+
+	public PlayerExpChangeListener(BasicChar plugin) {
 		this.plugin = plugin;
 	}
 	
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event) {
+	@EventHandler(priority = EventPriority.HIGHEST)
+	public void onPlayerExpChange(PlayerExpChangeEvent event) {
+		event.setAmount(0);
 		if (plugin.levels.get(event.getPlayer().getName()) == null) {
 			plugin.levels.put(event.getPlayer().getName(), 1);
-			event.getPlayer().setLevel(1);
 		}
 		if (plugin.experience.get(event.getPlayer().getName()) == null) {
 			plugin.experience.put(event.getPlayer().getName(), 0);
-			event.getPlayer().setExp(0);
 		}
 		int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(event.getPlayer().getName()));
 		while (plugin.experience.get(event.getPlayer().getName()) >= expToNextLevel) {

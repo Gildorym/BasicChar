@@ -1,4 +1,4 @@
-package com.gildorym.basicchar;
+package com.gildorymrp.basicchar;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -6,18 +6,18 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class GetLevelCommand implements CommandExecutor {
+public class GetClassCommand implements CommandExecutor {
 
 	private BasicChar plugin;
 
-	public GetLevelCommand(BasicChar plugin) {
+	public GetClassCommand(BasicChar plugin) {
 		this.plugin = plugin;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender.hasPermission("basicchar.command.getlevel")) {
-			String player = sender.getName();
+		String player = sender.getName();
+		if (sender.hasPermission("basicchar.command.getclass")) {
 			if (args.length >= 1) {
 				if (Bukkit.getServer().getPlayer(args[0]) != null) {
 					player = Bukkit.getServer().getPlayer(args[0]).getName();
@@ -26,12 +26,12 @@ public class GetLevelCommand implements CommandExecutor {
 					return true;
 				}
 			}
+		}
 			
-			if (plugin.levels.get(player) != null) {
-				sender.sendMessage(ChatColor.GREEN + player + "'s level is " + plugin.levels.get(player));
-			} else {
-				sender.sendMessage(ChatColor.RED + player + " has not been assigned a level!");
-			}
+		if (plugin.classes.get(player) != null) {
+			sender.sendMessage(ChatColor.GREEN + player + "'s class is " + plugin.classes.get(player).toString());
+		} else {
+			sender.sendMessage(ChatColor.RED + player + " has not chosen a class!");
 		}
 		return true;
 	}

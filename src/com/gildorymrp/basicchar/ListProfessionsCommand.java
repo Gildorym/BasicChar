@@ -1,16 +1,16 @@
-package com.gildorym.basicchar;
+package com.gildorymrp.basicchar;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class ListClassesCommand implements CommandExecutor {
+public class ListProfessionsCommand implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		for (CharacterClass characterClass : CharacterClass.values()) {
-			sender.sendMessage(ChatColor.GREEN + characterClass.toString());
+		for (CharacterProfession characterProfession : CharacterProfession.values()) {
+			sender.sendMessage(ChatColor.GREEN + characterProfession.toString());
 		}
 		return true;
 	}
