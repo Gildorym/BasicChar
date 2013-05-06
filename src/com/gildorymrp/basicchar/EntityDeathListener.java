@@ -1,5 +1,9 @@
 package com.gildorymrp.basicchar;
 
+import java.util.Random;
+
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -33,6 +37,8 @@ public class EntityDeathListener implements Listener {
 					}
 				}
 			}
+			Random random = new Random();
+			Integer money = 0;
 			if (player != null) {
 				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
 				/*if (event.getEntityType() == EntityType.BAT) {
@@ -69,6 +75,7 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 6);
 					player.sendMessage(ChatColor.YELLOW + "+6 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(7) + 6;
 				}
 				if (event.getEntityType() == EntityType.GHAST) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 6);
@@ -79,6 +86,7 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 100);
 					player.sendMessage(ChatColor.YELLOW + "+100 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(151) + 50;
 				}
 				/*if (event.getEntityType() == EntityType.IRON_GOLEM) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
@@ -109,6 +117,7 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 4);
 					player.sendMessage(ChatColor.YELLOW + "+4 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(3) + 2;
 				}
 				/*if (event.getEntityType() == EntityType.SHEEP) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
@@ -124,11 +133,13 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 3);
 					player.sendMessage(ChatColor.YELLOW + "+3 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(3) + 1;
 				}
 				if (event.getEntityType() == EntityType.SLIME) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 1);
 					player.sendMessage(ChatColor.YELLOW + "+1 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(4);
 				}
 				/*if (event.getEntityType() == EntityType.SNOWMAN) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
@@ -154,6 +165,7 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5);
 					player.sendMessage(ChatColor.YELLOW + "+5 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(3) + 3;
 				}
 				if (event.getEntityType() == EntityType.WITHER) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5000);
@@ -169,6 +181,7 @@ public class EntityDeathListener implements Listener {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 3);
 					player.sendMessage(ChatColor.YELLOW + "+3 exp");
 					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+					money += random.nextInt(4);
 				}
 				while (plugin.experience.get(player.getName()) >= expToNextLevel) {
 					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) - expToNextLevel);
@@ -178,6 +191,13 @@ public class EntityDeathListener implements Listener {
 				player.setExp((float) plugin.experience.get(player.getName()) / (float) expToNextLevel);
 				player.setLevel(plugin.levels.get(player.getName()));
 				player.setMaxHealth(plugin.levels.get(player.getName()) * 10);
+				Economy economy = plugin.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
+				economy.depositPlayer(player.getName(), money);
+				if (money > 1) {
+					player.sendMessage(ChatColor.YELLOW + "+" + money + " " + economy.currencyNamePlural());
+				} else if (money == 1) {
+					player.sendMessage(ChatColor.YELLOW + "+" + money + " " + economy.currencyNameSingular());
+				}
 			}
 		}
 	}
