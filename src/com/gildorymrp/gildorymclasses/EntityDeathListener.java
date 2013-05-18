@@ -2,10 +2,7 @@ package com.gildorymrp.gildorymclasses;
 
 import java.util.Random;
 
-import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.ChatColor;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -14,11 +11,13 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+import com.gildorymrp.api.Gildorym;
+
 public class EntityDeathListener implements Listener {
 	
-	private BasicChar plugin;
+	private GildorymClasses plugin;
 	
-	public EntityDeathListener(BasicChar plugin) {
+	public EntityDeathListener(GildorymClasses plugin) {
 		this.plugin = plugin;
 	}
 	
@@ -38,165 +37,84 @@ public class EntityDeathListener implements Listener {
 				}
 			}
 			Random random = new Random();
-			Integer money = 0;
 			if (player != null) {
-				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
-				/*if (event.getEntityType() == EntityType.BAT) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.BLAZE) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 6);
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+				int exp = 0;
+				int money = 0;
+				switch (event.getEntityType()) {
+					case BLAZE:
+						exp = 6;
+						break;
+					case CAVE_SPIDER:
+						exp = 5;
+						break;
+					case ENDERMAN:
+						exp = 6;
+						money = random.nextInt(7) + 6; //Between 6 and 12
+						break;
+					case ENDER_DRAGON:
+						exp = 5000;
+						break;
+					case GHAST:
+						exp = 6;
+						break;
+					case GIANT:
+						exp = 100;
+						money = random.nextInt(151) + 50; //Between 50 and 200
+						break;
+					case MAGMA_CUBE:
+						exp = 2;
+						break;
+					case OCELOT:
+						exp = 2;
+						break;
+					case PIG_ZOMBIE:
+						exp = 4;
+						money = random.nextInt(3) + 2; //Between 2 and 4
+						break;
+					case SILVERFISH:
+						exp = 1;
+						break;
+					case SKELETON:
+						exp = 3;
+						money = random.nextInt(3) + 1; //Between 1 and 3
+						break;
+					case SLIME:
+						exp = 1;
+						money = random.nextInt(4);
+						break;
+					case SPIDER:
+						exp = 3;
+						break;
+					case SQUID:
+						exp = 1;
+						break;
+					case WITCH:
+						exp = 5;
+						money = random.nextInt(3) + 3; //Between 3 and 5
+						break;
+					case WITHER:
+						exp = 5000;
+						break;
+					case WOLF:
+						exp = 2;
+						break;
+					case ZOMBIE:
+						exp = 3;
+						money = random.nextInt(4); //Between 0 and 3
+						break;
+					default:
+						break;
 				}
-				if (event.getEntityType() == EntityType.CAVE_SPIDER) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5);
-					player.sendMessage(ChatColor.YELLOW + "+5 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+				if (exp > 0) {
+					plugin.giveExperience(player, exp);
 				}
-				/*if (event.getEntityType() == EntityType.CHICKEN) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				/*if (event.getEntityType() == EntityType.COW) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.ENDER_DRAGON) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5000);
-					player.sendMessage(ChatColor.YELLOW + "+5000 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
+				if (money > 0) {
+					Gildorym.getEconomyPlugin().addMoney(player, money);
 				}
-				if (event.getEntityType() == EntityType.ENDERMAN) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 6);
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(7) + 6;
-				}
-				if (event.getEntityType() == EntityType.GHAST) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 6);
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.GIANT) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 100);
-					player.sendMessage(ChatColor.YELLOW + "+100 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(151) + 50;
-				}
-				/*if (event.getEntityType() == EntityType.IRON_GOLEM) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.MAGMA_CUBE) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 2);
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				/*if (event.getEntityType() == EntityType.MUSHROOM_COW) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.OCELOT) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 2);
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				/*if (event.getEntityType() == EntityType.PIG) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.PIG_ZOMBIE) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 4);
-					player.sendMessage(ChatColor.YELLOW + "+4 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(3) + 2;
-				}
-				/*if (event.getEntityType() == EntityType.SHEEP) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.SILVERFISH) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 1);
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.SKELETON) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 3);
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(3) + 1;
-				}
-				if (event.getEntityType() == EntityType.SLIME) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 1);
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(4);
-				}
-				/*if (event.getEntityType() == EntityType.SNOWMAN) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.SPIDER) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 3);
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.SQUID) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 1);
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				/*if (event.getEntityType() == EntityType.VILLAGER) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 0);
-					player.sendMessage(ChatColor.YELLOW + "+0 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}*/
-				if (event.getEntityType() == EntityType.WITCH) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5);
-					player.sendMessage(ChatColor.YELLOW + "+5 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(3) + 3;
-				}
-				if (event.getEntityType() == EntityType.WITHER) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 5000);
-					player.sendMessage(ChatColor.YELLOW + "+5000 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.WOLF) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 2);
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.ZOMBIE) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) + 3);
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + plugin.experience.get(player.getName()) + "/" + expToNextLevel);
-					money += random.nextInt(4);
-				}
-				while (plugin.experience.get(player.getName()) >= expToNextLevel) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) - expToNextLevel);
-					plugin.levels.put(player.getName(), plugin.levels.get(player.getName()) + 1);
-					expToNextLevel = 1000 * plugin.levels.get(player.getName());
-				}
-				player.setExp((float) plugin.experience.get(player.getName()) / (float) expToNextLevel);
-				player.setLevel(plugin.levels.get(player.getName()));
-				player.setMaxHealth(plugin.levels.get(player.getName()) * 10);
-				Economy economy = plugin.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
-				economy.depositPlayer(player.getName(), money);
 				if (money > 1) {
-					player.sendMessage(ChatColor.YELLOW + "+" + money + " " + economy.currencyNamePlural());
+					player.sendMessage(ChatColor.YELLOW + "+" + money + " Gold Coins");
 				} else if (money == 1) {
-					player.sendMessage(ChatColor.YELLOW + "+" + money + " " + economy.currencyNameSingular());
+					player.sendMessage(ChatColor.YELLOW + "+" + money + " Gold Coin");
 				}
 			}
 		}
