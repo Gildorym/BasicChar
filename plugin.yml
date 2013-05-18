@@ -31,24 +31,24 @@ commands:
         description: Sets your or someone elses profession
         usage: /<command> (player) [profession]
 permissions:
-    basicchar.command.addexp:
+    gildorym.classes.command.addexp:
         description: Allows you to add exp
         default: op
-    basicchar.command.getclass:
+    gildorym.classes.command.getclass:
         description: Allows you to get other peoples classes
         default: op
-    basicchar.command.getlevel:
+    gildorym.classes.command.getlevel:
         description: Allows you to get other peoples levels
         default: op
-    basicchar.command.getprofession:
+    gildorym.classes.command.getprofession:
         description: Allows you to get other peoples professions
         default: op
-    basicchar.command.setclass:
+    gildorym.classes.command.setclass:
         description: Allows you to set other peoples classes
         default: op
-    basicchar.command.setlevel:
+    gildorym.classes.command.setlevel:
         description: Allows you to set levels
         default: op
-    basicchar.command.setprofession:
+    gildorym.classes.command.setprofession:
         description: Allows you to set other peoples professions
         default: op
