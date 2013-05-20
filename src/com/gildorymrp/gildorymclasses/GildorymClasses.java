@@ -724,5 +724,13 @@ public class GildorymClasses extends JavaPlugin implements GildorymClassesPlugin
 	public int getExpToNextLevel(int level) {
 		return 1000 * level;
 	}
+	
+	protected Map<Character, Class> getClasses() {
+		return classes;
+	}
+	
+	protected Map<Character, Map<Class, Integer>> getExperience() {
+		return experience;
+	}
 
 }
