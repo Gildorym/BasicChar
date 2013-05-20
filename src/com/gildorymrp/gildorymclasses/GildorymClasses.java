@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gildorymrp.api.Gildorym;
+import com.gildorymrp.api.event.classes.GildorymClassChangeEvent;
+import com.gildorymrp.api.event.classes.GildorymClassLevelChangeEvent;
 import com.gildorymrp.api.plugin.classes.Class;
 import com.gildorymrp.api.plugin.classes.GildorymClassesPlugin;
 import com.gildorymrp.api.plugin.core.Character;
@@ -633,7 +635,12 @@ public class GildorymClasses extends JavaPlugin implements GildorymClassesPlugin
 
 	@Override
 	public void setClass(Character character, Class clazz) {
-		this.classes.put(character, clazz);
+		GildorymClassChangeEvent event = new GildorymClassChangeEvent(character, this.getClass(character), clazz);
+		this.getServer().getPluginManager().callEvent(event);
+		if (event.isCancelled()) {
+			return;
+		}
+		this.classes.put(event.getCharacter(), event.getClazz());
 	}
 
 	@Override
@@ -693,6 +700,13 @@ public class GildorymClasses extends JavaPlugin implements GildorymClassesPlugin
 
 	@Override
 	public void setTotalExperience(Character character, Class clazz, int amount) {
+		if (this.getTotalExperience(character, clazz) + amount > this.getTotalExperienceForLevel(this.getLevel(character) + 1)) {
+			GildorymClassLevelChangeEvent event = new GildorymClassLevelChangeEvent(character, clazz, this.getLevel(character), this.getLevel(character) + 1);
+			this.getServer().getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				return;
+			}
+		}
 		if (this.experience.get(character) == null) {
 			this.experience.put(character, new HashMap<Class, Integer>());
 		}
