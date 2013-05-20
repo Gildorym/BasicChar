@@ -700,8 +700,12 @@ public class GildorymClasses extends JavaPlugin implements GildorymClassesPlugin
 
 	@Override
 	public void setTotalExperience(Character character, Class clazz, int amount) {
-		if (this.getTotalExperience(character, clazz) + amount > this.getTotalExperienceForLevel(this.getLevel(character) + 1)) {
-			GildorymClassLevelChangeEvent event = new GildorymClassLevelChangeEvent(character, clazz, this.getLevel(character), this.getLevel(character) + 1);
+		int i = 0;
+		while (this.getTotalExperience(character, clazz) + amount > this.getTotalExperienceForLevel(this.getLevel(character) + i)) {
+			i += 1;
+		}
+		if (i >= 1) {
+			GildorymClassLevelChangeEvent event = new GildorymClassLevelChangeEvent(character, clazz, this.getLevel(character), this.getLevel(character) + i);
 			this.getServer().getPluginManager().callEvent(event);
 			if (event.isCancelled()) {
 				return;
