@@ -2,6 +2,7 @@ name: GildorymClasses
 author: Lucariatias
 version: 0.3.0
 main: com.gildorymrp.gildorymclasses.GildorymClasses
+depend: [GildorymAPI]
 commands:
     addexp:
         description: Adds exp to a player
