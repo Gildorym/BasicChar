@@ -1,4 +1,4 @@
-package com.gildorymrp.gildorymclasses;
+package com.gildorymrp.classes;
 
 import java.util.Random;
 

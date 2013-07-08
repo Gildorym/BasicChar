@@ -1,4 +1,4 @@
-package com.gildorymrp.gildorymclasses;
+package com.gildorymrp.classes;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
