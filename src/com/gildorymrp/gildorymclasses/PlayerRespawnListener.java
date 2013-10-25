@@ -1,43 +1,55 @@
 package com.gildorymrp.gildorymclasses;
 
+import java.util.Map;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerRespawnListener implements Listener {
-	
-	private BasicChar plugin;
-	
-	public PlayerRespawnListener(BasicChar plugin) {
+	private GildorymClasses plugin;
+
+	public PlayerRespawnListener(GildorymClasses plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	@EventHandler
 	public void onPlayerRespawn(PlayerRespawnEvent event) {
 		final Player player = event.getPlayer();
-		plugin.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-
-			@Override
+		this.plugin.getServer().getScheduler()
+		.scheduleSyncDelayedTask(this.plugin, new Runnable() {
 			public void run() {
-				if (plugin.levels.get(player.getName()) == null) {
-					plugin.levels.put(player.getName(), 1);
+				Map<String, Integer> levelMap = PlayerRespawnListener.this.plugin.levels;
+				Map<String, Integer> experienceMap = PlayerRespawnListener.this.plugin.experience;
+				if (levelMap.get(player.getName()) == null) {
+					levelMap.put(player.getName(), Integer.valueOf(1));
 				}
-				if (plugin.experience.get(player.getName()) == null) {
-					plugin.experience.put(player.getName(), 0);
+				if (experienceMap.get(player.getName()) == null) {
+					experienceMap.put(player.getName(),
+							Integer.valueOf(0));
 				}
-				int expToNextLevel = (int) Math.round(1000 * plugin.levels.get(player.getName()));
-				while (plugin.experience.get(player.getName()) >= expToNextLevel) {
-					plugin.experience.put(player.getName(), plugin.experience.get(player.getName()) - expToNextLevel);
-					plugin.levels.put(player.getName(), plugin.levels.get(player.getName()) + 1);
-					expToNextLevel = 1000 * plugin.levels.get(player.getName());
+				int expToNextLevel = Math
+						.round(1000 * ((Integer) levelMap.get(player
+								.getName())).intValue());
+				while (((Integer) experienceMap.get(player.getName()))
+						.intValue() >= expToNextLevel) {
+					experienceMap.put(player.getName(), Integer
+							.valueOf(((Integer) experienceMap
+									.get(player.getName())).intValue()
+									- expToNextLevel));
+					levelMap.put(player.getName(), Integer
+							.valueOf(((Integer) levelMap.get(player
+									.getName())).intValue() + 1));
+					expToNextLevel = 1000 * ((Integer) levelMap
+							.get(player.getName())).intValue();
 				}
-				player.setExp((float) plugin.experience.get(player.getName()) / (float) expToNextLevel);
-				player.setLevel(plugin.levels.get(player.getName()));
-				player.setMaxHealth(plugin.levels.get(player.getName()) * 10);
+				player.setExp(((Integer) experienceMap.get(player
+						.getName())).intValue() / expToNextLevel);
+				player.setLevel(((Integer) levelMap.get(player
+						.getName())).intValue());
+				player.setMaxHealth(((Integer) levelMap.get(player
+						.getName())).intValue() * 10);
 			}
-			
 		}, 20L);
 	}
-
 }

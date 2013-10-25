@@ -10,16 +10,17 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 
 public class SaveDataManager {
-	
-	public static void saveClassData(BasicChar plugin) {
+	public static void saveClassData(GildorymClasses plugin) {
 		try {
 			if (!plugin.getDataFolder().exists()) {
 				plugin.getDataFolder().mkdir();
 			}
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "classes.dat");
 			file.delete();
 			file.createNewFile();
-			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
+			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder()
+					.getAbsolutePath() + File.separator + "classes.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.classes);
 			oos.close();
@@ -29,13 +30,17 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static void loadClassData(BasicChar plugin) {
+	public static void loadClassData(GildorymClasses plugin) {
 		try {
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "classes.dat");
 			if (file.exists()) {
-				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "classes.dat");
+				FileInputStream fis = new FileInputStream(plugin
+						.getDataFolder().getAbsolutePath()
+						+ File.separator
+						+ "classes.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.classes.putAll((Map<String, CharacterClass>) ois.readObject());
 				ois.close();
@@ -48,16 +53,18 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void saveProfessionData(BasicChar plugin) {
+
+	public static void saveProfessionData(GildorymClasses plugin) {
 		try {
 			if (!plugin.getDataFolder().exists()) {
 				plugin.getDataFolder().mkdir();
 			}
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "professions.dat");
 			file.delete();
 			file.createNewFile();
-			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
+			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder()
+					.getAbsolutePath() + File.separator + "professions.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.professions);
 			oos.close();
@@ -67,13 +74,17 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static void loadProfessionData(BasicChar plugin) {
+	public static void loadProfessionData(GildorymClasses plugin) {
 		try {
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "professions.dat");
 			if (file.exists()) {
-				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "professions.dat");
+				FileInputStream fis = new FileInputStream(plugin
+						.getDataFolder().getAbsolutePath()
+						+ File.separator
+						+ "professions.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.professions.putAll((Map<String, CharacterProfession>) ois.readObject());
 				ois.close();
@@ -86,16 +97,18 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void saveLevelData(BasicChar plugin) {
+
+	public static void saveLevelData(GildorymClasses plugin) {
 		try {
 			if (!plugin.getDataFolder().exists()) {
 				plugin.getDataFolder().mkdir();
 			}
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "levels.dat");
 			file.delete();
 			file.createNewFile();
-			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
+			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder()
+					.getAbsolutePath() + File.separator + "levels.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.levels);
 			oos.close();
@@ -105,13 +118,17 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static void loadLevelData(BasicChar plugin) {
+	public static void loadLevelData(GildorymClasses plugin) {
 		try {
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "levels.dat");
 			if (file.exists()) {
-				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "levels.dat");
+				FileInputStream fis = new FileInputStream(plugin
+						.getDataFolder().getAbsolutePath()
+						+ File.separator
+						+ "levels.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.levels.putAll((Map<String, Integer>) ois.readObject());
 				ois.close();
@@ -124,16 +141,18 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
-	public static void saveExperienceData(BasicChar plugin) {
+
+	public static void saveExperienceData(GildorymClasses plugin) {
 		try {
 			if (!plugin.getDataFolder().exists()) {
 				plugin.getDataFolder().mkdir();
 			}
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "experience.dat");
 			file.delete();
 			file.createNewFile();
-			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			FileOutputStream fos = new FileOutputStream(plugin.getDataFolder()
+					.getAbsolutePath() + File.separator + "experience.dat");
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(plugin.experience);
 			oos.close();
@@ -143,13 +162,17 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static void loadExperienceData(BasicChar plugin) {
+	public static void loadExperienceData(GildorymClasses plugin) {
 		try {
-			File file = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+			File file = new File(plugin.getDataFolder().getAbsolutePath()
+					+ File.separator + "experience.dat");
 			if (file.exists()) {
-				FileInputStream fis = new FileInputStream(plugin.getDataFolder().getAbsolutePath() + File.separator + "experience.dat");
+				FileInputStream fis = new FileInputStream(plugin
+						.getDataFolder().getAbsolutePath()
+						+ File.separator
+						+ "experience.dat");
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				plugin.experience.putAll((Map<String, Integer>) ois.readObject());
 				ois.close();
@@ -162,5 +185,4 @@ public class SaveDataManager {
 			e.printStackTrace();
 		}
 	}
-
 }

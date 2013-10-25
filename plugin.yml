@@ -1,7 +1,7 @@
-name: BasicChar
-author: Lucariatias
+name: GildorymClasses
+author: [Lucariatias, melodichand, Hohahihehu]
 version: 0.2.11
-main: com.gildorymrp.basicchar.BasicChar
+main: com.gildorymrp.gildorymclasses.GildorymClasses
 commands:
     addexp:
         description: Adds exp to a player
