@@ -38,7 +38,7 @@ public class SetProfessionCommand implements CommandExecutor {
 			if (this.plugin.professions.get(sender.getName()) != null
 					&& !sender.hasPermission("basicchar.command.setprofession")) {
 				sender.sendMessage(ChatColor.RED
-						+ "You have already set your class!");
+						+ "You have already set your profession!");
 			} else {
 				try {
 					sender.sendMessage(ChatColor.GREEN
