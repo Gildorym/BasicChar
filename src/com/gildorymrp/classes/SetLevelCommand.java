@@ -1,5 +1,6 @@
 package com.gildorymrp.classes;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -8,37 +9,40 @@ import org.bukkit.entity.Player;
 
 public class SetLevelCommand implements CommandExecutor {
 	
-	private GildorymClasses plugin;
+	private BasicChar plugin;
 	
-	public SetLevelCommand(GildorymClasses plugin) {
+	public SetLevelCommand(BasicChar plugin) {
 		this.plugin = plugin;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (sender.hasPermission("gildorym.classes.command.setlevel")) {
+		if (sender.hasPermission("basicchar.command.setlevel")) {
 			if (args.length >= 2) {
 				try {
-					if (plugin.getServer().getPlayer(args[0]) != null) {
-						plugin.setLevel(plugin.getServer().getPlayer(args[0]), Integer.parseInt(args[1]));
+					if (Bukkit.getServer().getPlayer(args[0]) != null) {
+						plugin.levels.put(Bukkit.getServer().getPlayer(args[0]).getName(), Integer.parseInt(args[1]));
+						sender.sendMessage(ChatColor.GREEN + Bukkit.getServer().getPlayer(args[0]).getName() + "'s level set to " + args[1]);
+						Bukkit.getServer().getPlayer(args[0]).setLevel(Integer.parseInt(args[1]));
 					} else {
-						sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "That player is not online!");
+						sender.sendMessage(ChatColor.RED + "That player is not online!");
 					}
 				} catch (NumberFormatException exception) {
-					sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "Level must be an integer!");
+					sender.sendMessage(ChatColor.RED + "Level must be a number!");
 				}
 			} else if (args.length >= 1) {
 				try {
-					plugin.setLevel((Player) sender, Integer.parseInt(args[0]));
-					sender.sendMessage(GildorymClasses.PREFIX + ChatColor.GREEN + "Level set to " + args[0]);
+					plugin.levels.put(sender.getName(), Integer.parseInt(args[0]));
+					sender.sendMessage(ChatColor.GREEN + "Level set to " + args[0]);
+					((Player) sender).setLevel(Integer.parseInt(args[0]));
 				} catch (NumberFormatException exception) {
-					sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "Level must be a number!");
+					sender.sendMessage(ChatColor.RED + "Level must be a number!");
 				}
 			} else {
-				sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "You need to specify a level!");
+				sender.sendMessage(ChatColor.RED + "You need to specify a level!");
 			}
 		} else {
-			sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "You do not have permission!");
+			sender.sendMessage(ChatColor.RED + "You do not have permission!");
 		}
 		return true;
 	}

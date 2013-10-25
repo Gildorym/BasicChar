@@ -1,34 +1,38 @@
 package com.gildorymrp.classes;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 public class GetLevelCommand implements CommandExecutor {
 
-	private GildorymClasses plugin;
+	private BasicChar plugin;
 
-	public GetLevelCommand(GildorymClasses plugin) {
+	public GetLevelCommand(BasicChar plugin) {
 		this.plugin = plugin;
 	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		Player player = (Player) sender;
-		if (sender.hasPermission("gildorym.classes.command.getlevel")) {
+		if (sender.hasPermission("basicchar.command.getlevel")) {
+			String player = sender.getName();
 			if (args.length >= 1) {
-				if (plugin.getServer().getPlayer(args[0]) != null) {
-					player = plugin.getServer().getPlayer(args[0]);
+				if (Bukkit.getServer().getPlayer(args[0]) != null) {
+					player = Bukkit.getServer().getPlayer(args[0]).getName();
 				} else {
-					sender.sendMessage(GildorymClasses.PREFIX + ChatColor.RED + "That player is not online!");
+					sender.sendMessage(ChatColor.RED + "That player is not online!");
 					return true;
 				}
 			}
+			
+			if (plugin.levels.get(player) != null) {
+				sender.sendMessage(ChatColor.GREEN + player + "'s level is " + plugin.levels.get(player));
+			} else {
+				sender.sendMessage(ChatColor.RED + player + " has not been assigned a level!");
+			}
 		}
-		sender.sendMessage(GildorymClasses.PREFIX + ChatColor.GREEN + player.getName() + "'s level is " + plugin.getLevel(player));
-		sender.sendMessage(GildorymClasses.PREFIX + ChatColor.GREEN + "Progress towards next level: " + plugin.getExperienceTowardsNextLevel(player) + "/" + plugin.getExpToNextLevel(plugin.getLevel(player)));
 		return true;
 	}
 

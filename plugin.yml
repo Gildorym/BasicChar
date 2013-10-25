@@ -1,8 +1,13 @@
-name: GildorymClasses
+name: BasicChar
 author: Lucariatias
+<<<<<<< HEAD
 version: 0.3.0
 main: com.gildorymrp.classes.GildorymClasses
 depend: [GildorymAPI]
+=======
+version: 0.2.11
+main: com.gildorymrp.basicchar.BasicChar
+>>>>>>> parent of dc629d0... Implement GildorymAPI
 commands:
     addexp:
         description: Adds exp to a player
