@@ -1,4 +1,4 @@
-GildorymClasses
+BasicChar
 =========
 
-Gildorym class system
+Small temporary class system for the Gildorym server.

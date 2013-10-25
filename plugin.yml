@@ -1,8 +1,7 @@
-name: GildorymClasses
+name: BasicChar
 author: Lucariatias
-version: 0.3.0
-main: com.gildorymrp.classes.GildorymClasses
-depend: [GildorymAPI]
+version: 0.2.11
+main: com.gildorymrp.basicchar.BasicChar
 commands:
     addexp:
         description: Adds exp to a player
@@ -32,24 +31,24 @@ commands:
         description: Sets your or someone elses profession
         usage: /<command> (player) [profession]
 permissions:
-    gildorym.classes.command.addexp:
+    basicchar.command.addexp:
         description: Allows you to add exp
         default: op
-    gildorym.classes.command.getclass:
+    basicchar.command.getclass:
         description: Allows you to get other peoples classes
         default: op
-    gildorym.classes.command.getlevel:
+    basicchar.command.getlevel:
         description: Allows you to get other peoples levels
         default: op
-    gildorym.classes.command.getprofession:
+    basicchar.command.getprofession:
         description: Allows you to get other peoples professions
         default: op
-    gildorym.classes.command.setclass:
+    basicchar.command.setclass:
         description: Allows you to set other peoples classes
         default: op
-    gildorym.classes.command.setlevel:
+    basicchar.command.setlevel:
         description: Allows you to set levels
         default: op
-    gildorym.classes.command.setprofession:
+    basicchar.command.setprofession:
         description: Allows you to set other peoples professions
         default: op
