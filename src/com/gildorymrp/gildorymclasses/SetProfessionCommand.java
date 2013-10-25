@@ -34,19 +34,25 @@ public class SetProfessionCommand implements CommandExecutor {
 			} else
 				sender.sendMessage(ChatColor.RED
 						+ "That's not a valid profession!");
-		} else if (args.length >= 1)
-			try {
-				sender.sendMessage(ChatColor.GREEN
-						+ "Profession set to "
-						+ CharacterProfession.valueOf(args[0].toUpperCase())
-								.toString());
-				this.plugin.professions.put(sender.getName(),
-						CharacterProfession.valueOf(args[0].toUpperCase()));
-			} catch (IllegalArgumentException exception) {
+		} else if (args.length >= 1) {
+			if (this.plugin.professions.get(sender.getName()) != null
+					&& !sender.hasPermission("basicchar.command.setprofession")) {
 				sender.sendMessage(ChatColor.RED
-						+ "That's not a valid profession!");
+						+ "You have already set your class!");
+			} else {
+				try {
+					sender.sendMessage(ChatColor.GREEN
+							+ "Profession set to "
+							+ CharacterProfession
+									.valueOf(args[0].toUpperCase()).toString());
+					this.plugin.professions.put(sender.getName(),
+							CharacterProfession.valueOf(args[0].toUpperCase()));
+				} catch (IllegalArgumentException exception) {
+					sender.sendMessage(ChatColor.RED
+							+ "That's not a valid profession!");
+				}
 			}
-		else {
+		} else {
 			sender.sendMessage(ChatColor.RED
 					+ "You need to specify a profession!");
 		}
