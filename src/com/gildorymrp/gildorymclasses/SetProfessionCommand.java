@@ -58,4 +58,5 @@ public class SetProfessionCommand implements CommandExecutor {
 		}
 		return true;
 	}
+	
 }

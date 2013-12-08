@@ -1,6 +1,6 @@
 package com.gildorymrp.gildorymclasses;
 
-public enum CharacterProfession{
+public enum CharacterProfession {
   ALCHEMIST, 
   COOK, 
   FARMER, 

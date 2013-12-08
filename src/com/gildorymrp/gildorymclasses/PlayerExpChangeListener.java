@@ -1,11 +1,16 @@
 package com.gildorymrp.gildorymclasses;
 
 import java.util.Map;
+
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
+
+import com.gildorymrp.charactercards.CharacterCard;
+import com.gildorymrp.charactercards.GildorymCharacterCards;
 
 public class PlayerExpChangeListener implements Listener {
 	private GildorymClasses plugin;
@@ -19,6 +24,9 @@ public class PlayerExpChangeListener implements Listener {
 		Player player = event.getPlayer();
 		Map<String, Integer> levelMap = this.plugin.levels;
 		Map<String, Integer> experienceMap = this.plugin.experience;
+		GildorymCharacterCards gildorymCharacterCards = (GildorymCharacterCards) Bukkit.getServer().getPluginManager().getPlugin("GildorymCharacterCards");
+		Map<String, CharacterCard> cardMap = gildorymCharacterCards.getCharacterCards();
+		Integer pvpHealth = cardMap.get(player.getName()).getHealth();
 
 		event.setAmount(0);
 		if (levelMap.get(player.getName()) == null) {
@@ -39,10 +47,8 @@ public class PlayerExpChangeListener implements Listener {
 			expToNextLevel = 1000 * ((Integer) levelMap.get(player.getName()))
 					.intValue();
 		}
-		player.setExp(((Integer) experienceMap.get(player.getName()))
-				.intValue() / expToNextLevel);
-		player.setMaxHealth(((Integer) levelMap.get(player.getName()))
-				.intValue() * 10);
+		player.setExp(((Integer) experienceMap.get(player.getName())).intValue() / expToNextLevel);
+		player.setMaxHealth(pvpHealth * 5);
 		player.setLevel(((Integer) levelMap.get(player.getName())).intValue());
 	}
 }
