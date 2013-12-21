@@ -1,11 +1,17 @@
 package com.gildorymrp.gildorymclasses;
 
 import java.util.Map;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import com.gildorymrp.charactercards.CharacterCard;
+import com.gildorymrp.charactercards.GildorymCharacterCards;
+import com.gildorymrp.charactercards.Race;
 
 public class AddExpCommand implements CommandExecutor {
 	private GildorymClasses plugin;
@@ -20,6 +26,8 @@ public class AddExpCommand implements CommandExecutor {
 			Player player = this.plugin.getServer().getPlayer(args[0]);
 			Map<String, Integer> levelMap = this.plugin.levels;
 			Map<String, Integer> experienceMap = this.plugin.experience;
+			GildorymCharacterCards gildorymCharacterCards = (GildorymCharacterCards) Bukkit.getServer().getPluginManager().getPlugin("GildorymCharacterCards");
+			Map<String, CharacterCard> cardMap = gildorymCharacterCards.getCharacterCards();
 
 			if (player != null) {
 				if (levelMap.get(player.getName()) == null) {
@@ -46,12 +54,17 @@ public class AddExpCommand implements CommandExecutor {
 					expToNextLevel = 1000 * ((Integer) levelMap.get(player
 							.getName())).intValue();
 				}
+				
+				CharacterClass clazz = this.plugin.classes.get(player.getName());
+				Integer level = levelMap.get(player.getName());
+				Race race = cardMap.get(player.getName()).getRace();
+				Integer pvpHealth = CharacterCard.calculateHealth(clazz, race, level);
+				
 				player.setExp(((Integer) experienceMap.get(player.getName()))
 						.intValue() / expToNextLevel);
 				player.setLevel(((Integer) levelMap.get(player.getName()))
 						.intValue());
-				player.setMaxHealth(((Integer) levelMap.get(player.getName()))
-						.intValue() * 10);
+				player.setMaxHealth(pvpHealth * 5);
 				player.sendMessage(ChatColor.YELLOW + "+"
 						+ Integer.parseInt(args[1]) + " exp");
 				player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE

@@ -2,7 +2,10 @@ package com.gildorymrp.gildorymclasses;
 
 import java.util.Map;
 import java.util.Random;
+
 import net.milkbowl.vault.economy.Economy;
+
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -12,6 +15,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+
+import com.gildorymrp.charactercards.CharacterCard;
+import com.gildorymrp.charactercards.GildorymCharacterCards;
+import com.gildorymrp.charactercards.Race;
 
 public class EntityDeathListener
 implements Listener
@@ -43,6 +50,9 @@ implements Listener
 			if (player != null) {
 				Map<String, Integer> experienceMap = this.plugin.experience;
 				Map<String, Integer> levelMap = this.plugin.levels;
+				GildorymCharacterCards gildorymCharacterCards = (GildorymCharacterCards) Bukkit.getServer().getPluginManager().getPlugin("GildorymCharacterCards");
+				Map<String, CharacterCard> cardMap = gildorymCharacterCards.getCharacterCards();
+				
 				int expToNextLevel = Math.round(1000 * ((Integer)levelMap.get(player.getName())).intValue());
 
 				if (event.getEntityType() == EntityType.BLAZE) {
@@ -154,9 +164,15 @@ implements Listener
 					levelMap.put(player.getName(), Integer.valueOf(((Integer)levelMap.get(player.getName())).intValue() + 1));
 					expToNextLevel = 1000 * ((Integer)levelMap.get(player.getName())).intValue();
 				}
+				
+				CharacterClass clazz = this.plugin.classes.get(player.getName());
+				Integer level = levelMap.get(player.getName());
+				Race race = cardMap.get(player.getName()).getRace();
+				Integer pvpHealth = CharacterCard.calculateHealth(clazz, race, level);
+				
 				player.setExp(((Integer)experienceMap.get(player.getName())).intValue() / expToNextLevel);
 				player.setLevel(((Integer)levelMap.get(player.getName())).intValue());
-				player.setMaxHealth(((Integer)levelMap.get(player.getName())).intValue() * 10);
+				player.setMaxHealth(pvpHealth * 5);
 				Economy economy = (Economy)this.plugin.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
 				economy.depositPlayer(player.getName(), money.intValue());
 				if (money.intValue() > 1)
