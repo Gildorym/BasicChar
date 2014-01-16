@@ -25,6 +25,7 @@ public class GildorymClasses extends JavaPlugin {
 		getCommand("getlevel").setExecutor(new GetLevelCommand(this));
 		getCommand("listclasses").setExecutor(new ListClassesCommand());
 		getCommand("listprofessions").setExecutor(new ListProfessionsCommand());
+		getCommand("checkexp").setExecutor(new CheckXPCommand(this));
 		registerListeners(new Listener[] { new PlayerJoinListener(this),
 				new PlayerExpChangeListener(this),
 				new PlayerRespawnListener(this), new EntityDeathListener(this),

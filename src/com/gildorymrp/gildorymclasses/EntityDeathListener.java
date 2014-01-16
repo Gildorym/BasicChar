@@ -56,107 +56,83 @@ implements Listener
 				int expToNextLevel = Math.round(1000 * ((Integer)levelMap.get(player.getName())).intValue());
 
 				if (event.getEntityType() == EntityType.BLAZE) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.CAVE_SPIDER) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5));
-					player.sendMessage(ChatColor.YELLOW + "+5 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-
-				if (event.getEntityType() == EntityType.ENDER_DRAGON) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5000));
-					player.sendMessage(ChatColor.YELLOW + "+5000 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.ENDERMAN) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
+					//player.sendMessage(ChatColor.YELLOW + "+6 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.CAVE_SPIDER) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5));
+					//player.sendMessage(ChatColor.YELLOW + "+5 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.ENDER_DRAGON) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5000));
+					//player.sendMessage(ChatColor.YELLOW + "+5000 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.ENDERMAN) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
+					//player.sendMessage(ChatColor.YELLOW + "+6 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + (random.nextInt(7) + 6));
-				}
-				if (event.getEntityType() == EntityType.GHAST) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
-					player.sendMessage(ChatColor.YELLOW + "+6 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.GIANT) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 100));
-					player.sendMessage(ChatColor.YELLOW + "+100 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.GHAST) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
+					//player.sendMessage(ChatColor.YELLOW + "+6 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.GIANT) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 100));
+					//player.sendMessage(ChatColor.YELLOW + "+100 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + (random.nextInt(151) + 50));
-				}
-
-				if (event.getEntityType() == EntityType.MAGMA_CUBE) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-
-				if (event.getEntityType() == EntityType.OCELOT) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-
-				if (event.getEntityType() == EntityType.PIG_ZOMBIE) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 4));
-					player.sendMessage(ChatColor.YELLOW + "+4 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.MAGMA_CUBE) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
+					//player.sendMessage(ChatColor.YELLOW + "+2 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.OCELOT) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
+					//player.sendMessage(ChatColor.YELLOW + "+2 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.PIG_ZOMBIE) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 4));
+					//player.sendMessage(ChatColor.YELLOW + "+4 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + (random.nextInt(3) + 2));
-				}
-
-				if (event.getEntityType() == EntityType.SILVERFISH) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.SKELETON) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.SILVERFISH) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
+					//player.sendMessage(ChatColor.YELLOW + "+1 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.SKELETON) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
+					//player.sendMessage(ChatColor.YELLOW + "+3 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + (random.nextInt(3) + 1));
-				}
-				if (event.getEntityType() == EntityType.SLIME) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.SLIME) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
+					//player.sendMessage(ChatColor.YELLOW + "+1 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + random.nextInt(4));
-				}
-
-				if (event.getEntityType() == EntityType.SPIDER) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.SQUID) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
-					player.sendMessage(ChatColor.YELLOW + "+1 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-
-				if (event.getEntityType() == EntityType.WITCH) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5));
-					player.sendMessage(ChatColor.YELLOW + "+5 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.SPIDER) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
+					//player.sendMessage(ChatColor.YELLOW + "+3 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.SQUID) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 1));
+					//player.sendMessage(ChatColor.YELLOW + "+1 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.WITCH) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5));
+					//player.sendMessage(ChatColor.YELLOW + "+5 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + (random.nextInt(3) + 3));
-				}
-				if (event.getEntityType() == EntityType.WITHER) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5000));
-					player.sendMessage(ChatColor.YELLOW + "+5000 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.WOLF) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
-					player.sendMessage(ChatColor.YELLOW + "+2 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
-				}
-				if (event.getEntityType() == EntityType.ZOMBIE) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
-					player.sendMessage(ChatColor.YELLOW + "+3 exp");
-					player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.WITHER) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 5000));
+					//player.sendMessage(ChatColor.YELLOW + "+5000 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.WOLF) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 2));
+					//player.sendMessage(ChatColor.YELLOW + "+2 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
+				} else if (event.getEntityType() == EntityType.ZOMBIE) {
+					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 3));
+					//player.sendMessage(ChatColor.YELLOW + "+3 exp");
+					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + random.nextInt(4));
 				}
 				while (((Integer)experienceMap.get(player.getName())).intValue() >= expToNextLevel) {

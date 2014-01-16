@@ -1,11 +1,14 @@
 name: GildorymClasses
 author: [Lucariatias, melodichand, Hohahihehu]
-version: 0.2.11
+version: 0.2.12
 main: com.gildorymrp.gildorymclasses.GildorymClasses
 commands:
     addexp:
         description: Adds exp to a player
         usage: /<command> [ign] [amount]
+    checkexp:
+        description: Allows a player to check their exp
+        usage: /<command>
     getclass:
         description: Gets someones class
         usage: /<command> (ign)
