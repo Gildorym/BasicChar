@@ -60,8 +60,7 @@ public class AddExpCommand implements CommandExecutor {
 				Race race = cardMap.get(player.getName()).getRace();
 				Integer pvpHealth = CharacterCard.calculateHealth(clazz, race, level);
 				
-				player.setExp(((Integer) experienceMap.get(player.getName()))
-						.intValue() / expToNextLevel);
+				player.setExp((float) (((Integer) experienceMap.get(player.getName())).intValue() / (double) expToNextLevel));
 				player.setLevel(((Integer) levelMap.get(player.getName()))
 						.intValue());
 				player.setMaxHealth(pvpHealth * 5);

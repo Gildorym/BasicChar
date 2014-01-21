@@ -41,7 +41,7 @@ public class PlayerExpChangeListener implements Listener {
 			levelMap.put(player.getName(), Integer.valueOf(((Integer) levelMap.get(player.getName())).intValue() + 1));
 			expToNextLevel = 1000 * ((Integer) levelMap.get(player.getName())).intValue();
 		}
-		player.setExp(((Integer) experienceMap.get(player.getName())).intValue() / expToNextLevel);
+		player.setExp((float) (((Integer) experienceMap.get(player.getName())).intValue() / (double) expToNextLevel));
 		
 		CharacterClass clazz = this.plugin.classes.get(player.getName());
 		Integer level = levelMap.get(player.getName());
