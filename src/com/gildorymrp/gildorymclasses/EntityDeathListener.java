@@ -38,7 +38,7 @@ implements Listener
 				player = (Player)((EntityDamageByEntityEvent)event.getEntity().getLastDamageCause()).getDamager();
 			}
 			if ((((EntityDamageByEntityEvent)event.getEntity().getLastDamageCause()).getDamager() instanceof Projectile)) {
-				LivingEntity shooter = ((Projectile)((EntityDamageByEntityEvent)event.getEntity().getLastDamageCause()).getDamager()).getShooter();
+				LivingEntity shooter = (LivingEntity) ((Projectile)((EntityDamageByEntityEvent)event.getEntity().getLastDamageCause()).getDamager()).getShooter();
 				if ((shooter != null) && 
 						(shooter instanceof Player)) {
 					player = (Player) shooter;
