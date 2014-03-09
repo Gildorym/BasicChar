@@ -6,12 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class GetLevelCommand implements CommandExecutor {
-	private GildorymClasses plugin;
+import com.gildorymrp.gildorym.Gildorym;
+import com.gildorymrp.gildorym.GildorymCharacter;
 
-	public GetLevelCommand(GildorymClasses plugin) {
-		this.plugin = plugin;
-	}
+public class GetLevelCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -27,13 +25,11 @@ public class GetLevelCommand implements CommandExecutor {
 				}
 			}
 
-			if (this.plugin.levels.get(player) != null)
-				sender.sendMessage(ChatColor.GREEN + player + "'s level is "
-						+ this.plugin.levels.get(player));
-			else {
-				sender.sendMessage(ChatColor.RED + player
-						+ " has not been assigned a level!");
-			}
+			Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+			GildorymCharacter gChar = gildorym.getActiveCharacters().get(player);	
+			
+			sender.sendMessage(ChatColor.GREEN + player + "'s level is "
+						+ gChar.getLevel());
 		}
 		return true;
 	}

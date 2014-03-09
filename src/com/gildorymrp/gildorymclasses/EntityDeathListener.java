@@ -1,6 +1,5 @@
 package com.gildorymrp.gildorymclasses;
 
-import java.util.Map;
 import java.util.Random;
 
 import net.milkbowl.vault.economy.Economy;
@@ -17,8 +16,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 
 import com.gildorymrp.charactercards.CharacterCard;
-import com.gildorymrp.charactercards.GildorymCharacterCards;
-import com.gildorymrp.charactercards.Race;
+import com.gildorymrp.gildorym.Gildorym;
+import com.gildorymrp.gildorym.GildorymCharacter;
 
 public class EntityDeathListener
 implements Listener
@@ -48,12 +47,10 @@ implements Listener
 			Random random = new Random();
 			Integer money = Integer.valueOf(0);
 			if (player != null) {
-				Map<String, Integer> experienceMap = this.plugin.experience;
-				Map<String, Integer> levelMap = this.plugin.levels;
-				GildorymCharacterCards gildorymCharacterCards = (GildorymCharacterCards) Bukkit.getServer().getPluginManager().getPlugin("GildorymCharacterCards");
-				Map<String, CharacterCard> cardMap = gildorymCharacterCards.getCharacterCards();
+				Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+				GildorymCharacter gChar = gildorym.getActiveCharacters().get(player.getName());	
 				
-				int expToNextLevel = Math.round(1000 * ((Integer)levelMap.get(player.getName())).intValue());
+				int expToNextLevel = Math.round(1000 * gChar.getLevel());
 
 				if (event.getEntityType() == EntityType.BLAZE) {
 					//experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() + 6));
@@ -135,19 +132,16 @@ implements Listener
 					//player.sendMessage(ChatColor.GRAY + "Total: " + ChatColor.WHITE + experienceMap.get(player.getName()) + "/" + expToNextLevel);
 					money = Integer.valueOf(money.intValue() + random.nextInt(4));
 				}
-				while (((Integer)experienceMap.get(player.getName())).intValue() >= expToNextLevel) {
-					experienceMap.put(player.getName(), Integer.valueOf(((Integer)experienceMap.get(player.getName())).intValue() - expToNextLevel));
-					levelMap.put(player.getName(), Integer.valueOf(((Integer)levelMap.get(player.getName())).intValue() + 1));
-					expToNextLevel = 1000 * ((Integer)levelMap.get(player.getName())).intValue();
+				while (gChar.getExperience() >= expToNextLevel) {
+					gChar.setExperience(gChar.getExperience() - expToNextLevel);
+					gChar.setLevel(gChar.getLevel() + 1);
+					expToNextLevel = 1000 * gChar.getLevel();
 				}
 				
-				CharacterClass clazz = this.plugin.classes.get(player.getName());
-				Integer level = levelMap.get(player.getName());
-				Race race = cardMap.get(player.getName()).getRace();
-				Integer pvpHealth = CharacterCard.calculateHealth(clazz, race, level);
+				Integer pvpHealth = CharacterCard.calculateHealth(gChar);
 				
-				player.setExp((float) (((Integer) experienceMap.get(player.getName())).intValue() / (double) expToNextLevel));
-				player.setLevel(((Integer)levelMap.get(player.getName())).intValue());
+				player.setExp((float) (gChar.getExperience() / (double) expToNextLevel));
+				player.setLevel(gChar.getLevel());
 				player.setMaxHealth(pvpHealth * 5);
 				Economy economy = (Economy)this.plugin.getServer().getServicesManager().getRegistration(Economy.class).getProvider();
 				economy.depositPlayer(player.getName(), money.intValue());

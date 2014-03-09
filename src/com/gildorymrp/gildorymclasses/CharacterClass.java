@@ -11,5 +11,6 @@ public enum CharacterClass{
   RANGER, 
   ROGUE, 
   SORCERER, 
-  WIZARD;
+  WIZARD,
+  UNKNOWN;
 }

@@ -6,12 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class GetProfessionCommand implements CommandExecutor {
-	private GildorymClasses plugin;
+import com.gildorymrp.gildorym.Gildorym;
+import com.gildorymrp.gildorym.GildorymCharacter;
 
-	public GetProfessionCommand(GildorymClasses plugin) {
-		this.plugin = plugin;
-	}
+public class GetProfessionCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -26,14 +24,23 @@ public class GetProfessionCommand implements CommandExecutor {
 			}
 
 		}
+		
+		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+		GildorymCharacter gChar = gildorym.getActiveCharacters().get(player);	
 
-		if (this.plugin.professions.get(player) != null)
+		if (gChar.getProfessions() != null)
+		{
+			CharacterProfession[] professions = gChar.getProfessions();
+			String professionsList = "";
+			for (CharacterProfession profession : professions) {
+				professionsList += profession.toString() + ", ";
+			}
+			professionsList.substring(0, professionsList.length() - 2);
 			sender.sendMessage(ChatColor.GREEN
 					+ player
-					+ "'s profession is "
-					+ ((CharacterProfession) this.plugin.professions
-							.get(player)).toString());
-		else {
+					+ "'s professions are "
+					+ professionsList);
+		} else {
 			sender.sendMessage(ChatColor.RED + player
 					+ " has not chosen a profession!");
 		}

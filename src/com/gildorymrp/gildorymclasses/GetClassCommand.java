@@ -6,12 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class GetClassCommand implements CommandExecutor {
-	private GildorymClasses plugin;
+import com.gildorymrp.gildorym.Gildorym;
+import com.gildorymrp.gildorym.GildorymCharacter;
 
-	public GetClassCommand(GildorymClasses plugin) {
-		this.plugin = plugin;
-	}
+public class GetClassCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
@@ -27,12 +25,14 @@ public class GetClassCommand implements CommandExecutor {
 
 		}
 
-		if (this.plugin.classes.get(player) != null)
+		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+		GildorymCharacter gChar = gildorym.getActiveCharacters().get(player);	
+		
+		if (gChar.getClass() != null)
 			sender.sendMessage(ChatColor.GREEN
 					+ player
 					+ "'s class is "
-					+ ((CharacterClass) this.plugin.classes.get(player))
-							.toString());
+					+ gChar.getClass().toString());
 		else {
 			sender.sendMessage(ChatColor.RED + player
 					+ " has not chosen a class!");
