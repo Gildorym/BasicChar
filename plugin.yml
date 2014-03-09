@@ -1,6 +1,6 @@
 name: GildorymClasses
 author: [Lucariatias, melodichand, Hohahihehu]
-version: 0.2.12
+version: 1.0
 main: com.gildorymrp.gildorymclasses.GildorymClasses
 depend: [Gildorym]
 commands:
