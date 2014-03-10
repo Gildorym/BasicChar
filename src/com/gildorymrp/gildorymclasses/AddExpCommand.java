@@ -10,12 +10,17 @@ import org.bukkit.entity.Player;
 import com.gildorymrp.charactercards.CharacterCard;
 import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorym.GildorymCharacter;
+import com.gildorymrp.gildorym.MySQLDatabase;
 
 public class AddExpCommand implements CommandExecutor {
 	private GildorymClasses plugin;
+	private Gildorym gildorym;
+	private MySQLDatabase sqlDB;
 
-	public AddExpCommand(GildorymClasses plugin) {
+	public AddExpCommand(Gildorym gildorym, GildorymClasses plugin) {
+		this.gildorym = gildorym;
 		this.plugin = plugin;
+		this.sqlDB = gildorym.getMySQLDatabase();
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -25,7 +30,6 @@ public class AddExpCommand implements CommandExecutor {
 			
 
 			if (player != null) {
-				Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
 				GildorymCharacter gChar = gildorym.getActiveCharacters().get(player.getName());
 				gChar.setExperience(gChar.getExperience() + + Integer.parseInt(args[1]));
 				int expToNextLevel = 1000 * gChar.getLevel();
@@ -34,7 +38,7 @@ public class AddExpCommand implements CommandExecutor {
 					gChar.setLevel(gChar.getLevel() + 1);
 					expToNextLevel = 1000 * gChar.getLevel();
 				}
-				
+				sqlDB.saveCharacter(gChar);
 				Integer pvpHealth = CharacterCard.calculateHealth(gChar);
 				
 				player.setExp((float) (gChar.getExperience() / (double) expToNextLevel));

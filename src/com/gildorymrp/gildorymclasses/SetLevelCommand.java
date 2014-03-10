@@ -9,12 +9,19 @@ import org.bukkit.entity.Player;
 
 import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorym.GildorymCharacter;
+import com.gildorymrp.gildorym.MySQLDatabase;
 
 public class SetLevelCommand implements CommandExecutor {
+	private Gildorym gildorym;
+	private MySQLDatabase sqlDB;
+
+	public SetLevelCommand(Gildorym gildorym) {
+		this.gildorym = gildorym;
+		this.sqlDB = gildorym.getMySQLDatabase();
+	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
-		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
 		if (sender.hasPermission("basicchar.command.setlevel")) {
 			if (args.length >= 2)
 				try {
@@ -45,6 +52,7 @@ public class SetLevelCommand implements CommandExecutor {
 					sender.sendMessage(ChatColor.GREEN + "Level set to "
 							+ args[0]);
 					((Player) sender).setLevel(Integer.parseInt(args[0]));
+					sqlDB.saveCharacter(gChar);
 				} catch (NumberFormatException exception) {
 					sender.sendMessage(ChatColor.RED
 							+ "Level must be a number!");

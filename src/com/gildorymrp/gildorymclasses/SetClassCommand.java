@@ -9,12 +9,20 @@ import org.bukkit.entity.Player;
 
 import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorym.GildorymCharacter;
+import com.gildorymrp.gildorym.MySQLDatabase;
 
 public class SetClassCommand implements CommandExecutor {
 
+	private Gildorym gildorym;
+	private MySQLDatabase sqlDB;
+
+	public SetClassCommand(Gildorym gildorym) {
+		this.gildorym = gildorym;
+		this.sqlDB = gildorym.getMySQLDatabase();
+	}
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
-		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
 		if ((args.length >= 2)
 				&& (sender.hasPermission("basicchar.command.setclass"))) {
 			if (CharacterClass.valueOf(args[1].toUpperCase()) != null) {
@@ -24,6 +32,7 @@ public class SetClassCommand implements CommandExecutor {
 					
 					try {
 					gChar.setCharClass(CharacterClass.valueOf(args[1].toUpperCase()));
+					sqlDB.saveCharacter(gChar);
 					sender.sendMessage(ChatColor.GREEN
 							+ player.getName()
 							+ "'s class set to "

@@ -1,15 +1,19 @@
 package com.gildorymrp.gildorymclasses;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.gildorymrp.gildorym.Gildorym;
 
 public class GildorymClasses extends JavaPlugin {
 
 	public void onEnable() {
-		getCommand("addexp").setExecutor(new AddExpCommand(this));
-		getCommand("setclass").setExecutor(new SetClassCommand());
-		getCommand("setprofession").setExecutor(new SetProfessionCommand());
-		getCommand("setlevel").setExecutor(new SetLevelCommand());
+		final Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
+		getCommand("addexp").setExecutor(new AddExpCommand(gildorym, this));
+		getCommand("setclass").setExecutor(new SetClassCommand(gildorym));
+		getCommand("setprofession").setExecutor(new SetProfessionCommand(gildorym));
+		getCommand("setlevel").setExecutor(new SetLevelCommand(gildorym));
 		getCommand("getclass").setExecutor(new GetClassCommand());
 		getCommand("getprofession").setExecutor(new GetProfessionCommand());
 		getCommand("getlevel").setExecutor(new GetLevelCommand());

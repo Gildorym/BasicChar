@@ -9,12 +9,20 @@ import org.bukkit.entity.Player;
 
 import com.gildorymrp.gildorym.Gildorym;
 import com.gildorymrp.gildorym.GildorymCharacter;
+import com.gildorymrp.gildorym.MySQLDatabase;
 
 public class SetProfessionCommand implements CommandExecutor {
 
+	private Gildorym gildorym;
+	private MySQLDatabase sqlDB;
+
+	public SetProfessionCommand(Gildorym gildorym) {
+		this.gildorym = gildorym;
+		this.sqlDB = gildorym.getMySQLDatabase();
+	}
+
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
 			String[] args) {
-		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
 		if ((args.length >= 2)
 				&& (sender.hasPermission("basicchar.command.setprofession"))) {
 			if (CharacterProfession.valueOf(args[1].toUpperCase()) != null) {
@@ -26,6 +34,7 @@ public class SetProfessionCommand implements CommandExecutor {
 					try {
 						gChar.setProfessions(new CharacterProfession[] { CharacterProfession
 								.valueOf(args[1].toUpperCase()) });
+						sqlDB.saveCharacter(gChar);
 						sender.sendMessage(ChatColor.GREEN
 								+ Bukkit.getServer().getPlayer(args[0])
 										.getName()
