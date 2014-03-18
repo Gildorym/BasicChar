@@ -28,14 +28,12 @@ public class GetProfessionCommand implements CommandExecutor {
 		Gildorym gildorym = (Gildorym) Bukkit.getServer().getPluginManager().getPlugin("Gildorym");
 		GildorymCharacter gChar = gildorym.getActiveCharacters().get(player);	
 
-		if (gChar.getProfessions() != null)
+		if (gChar.getProfession1() != null)
 		{
-			CharacterProfession[] professions = gChar.getProfessions();
-			String professionsList = "";
-			for (CharacterProfession profession : professions) {
-				professionsList += profession.toString() + ", ";
-			}
-			professionsList.substring(0, professionsList.length() - 2);
+			String professionsList = gChar.getProfession1().toString();
+			if(gChar.getProfession2() != null) 
+				professionsList += ", " + gChar.getProfession2().toString();
+			
 			sender.sendMessage(ChatColor.GREEN
 					+ player
 					+ "'s professions are "

@@ -32,8 +32,8 @@ public class SetProfessionCommand implements CommandExecutor {
 							.get(player.getName());
 
 					try {
-						gChar.setProfessions(new CharacterProfession[] { CharacterProfession
-								.valueOf(args[1].toUpperCase()) });
+						gChar.setProfession1( CharacterProfession
+								.valueOf(args[1].toUpperCase()));
 						sqlDB.saveCharacter(gChar);
 						sender.sendMessage(ChatColor.GREEN
 								+ Bukkit.getServer().getPlayer(args[0])
@@ -65,8 +65,8 @@ public class SetProfessionCommand implements CommandExecutor {
 			} else {
 				try {
 					GildorymCharacter gChar = gildorym.getActiveCharacters().get(sender.getName());
-					gChar.setProfessions(new CharacterProfession[] { CharacterProfession
-							.valueOf(args[0].toUpperCase()) });
+					gChar.setProfession1(CharacterProfession
+							.valueOf(args[0].toUpperCase()));
 					sender.sendMessage(ChatColor.GREEN
 							+ "Profession set to "
 							+ CharacterProfession
