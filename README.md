@@ -1,4 +1,5 @@
 BasicChar
 =========
 
-Small temporary class system for the Gildorym server.
+Small temporary class system for the Gildorym server
+
